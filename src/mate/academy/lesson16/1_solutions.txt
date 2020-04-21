@@ -1,0 +1,52 @@
+1. https://code.sololearn.com/ctTjmJWmer4V/#java
+
+    //usual case
+    private static int sumStream(List<Integer> list) {
+            return list.stream()
+            .filter(num -> num > 10)
+            .reduce(0, Integer::sum);
+    }
+
+    private static int sumStream(List<Integer> list) {
+            // what means acc? Reducer can be simplified
+            return list.stream().reduce(0, (acc, number) -> number > 10 ? acc + number : acc + 0);
+    }
+
+
+    private static int sumStream(List<Integer> list) {
+        return list.stream()
+        .flatMapToInt(IntStream::of) // something new
+        .filter(num -> num > 10)
+        .sum();
+    }
+
+    // also good solution
+    private static int sumStream(List<Integer> list) {
+        return list.stream()
+        .filter(n-> n > 10)
+        .mapToInt(n -> n)
+        .sum();
+    }
+
+    // also good solution
+    private static int sumStream(List<Integer> list) {
+        return list.stream()
+        .filter(a -> a > 10)
+        .reduce(0, (a, b) -> (a + b));
+    }
+
+    // also good solution
+    private static int sumStream(List<Integer> list) {
+        return list.stream().mapToInt(Integer::intValue).filter(x -> x > 10).sum();
+    }
+
+    // We can avoid using String here
+    private static int sumStream(List<Integer> list) {
+        return (int) list.stream().filter(i -> i > 10).mapToInt((s) -> Integer.parseInt(String.valueOf(s))).sum();
+    }
+
+    // something new)
+    private static int sumStream(List<Integer> list) {
+        return list.stream().collect(Collectors.summingInt(((p) -> p > 10 ? p : 0)));
+    }
+

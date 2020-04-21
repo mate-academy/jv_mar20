@@ -1,0 +1,18 @@
+5. https://code.sololearn.com/ckCfwD6480F5/#java
+
+    public static List<Character> getUniqueCharacters(String sourceString) {
+        return sourceString
+            .chars()
+            .distinct()
+            .mapToObj(c -> (char) c)
+            .collect(Collectors.toList());
+    }
+
+    public static List<Character> getUniqueCharacters(String sourceString) {
+        "hello" -> ["h", "e", "l", "l", "o"]
+        return Arrays.stream(sourceString.split("")) //converting to chars can be more simple
+                .filter(str -> str.length() > 0)
+                .distinct()
+                .map(str -> str.charAt(0))
+                .collect(Collectors.toList());
+    }

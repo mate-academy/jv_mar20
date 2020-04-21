@@ -1,0 +1,25 @@
+2. https://code.sololearn.com/ck1mSkQ47TGh/#java
+
+    // usual case
+    public static List<String> getPersonNames(List<Person> persons) {
+        return persons.stream()
+        .filter(person -> person.getAge() > 30)
+        .map(Person::getName)
+        .collect(Collectors.toList());
+    }
+
+    // also good solution
+    public static List<String> getPersonNames(List<Person> persons) {
+        return persons.stream()
+        .filter(p -> p.getAge() > 30)
+        .map(p -> p.getName()) // no static reference
+        .collect(Collectors.toList());
+    }
+
+    // Why x? Please use proper naming in the streams
+    public static List<String> getPersonNames(List<Person> persons) {
+        return persons.stream()
+        .filter(x -> x.getAge() > 30)
+        .map(x -> x.getName())
+        .collect(Collectors.toList());
+    }

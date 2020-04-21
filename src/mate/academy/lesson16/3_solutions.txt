@@ -1,0 +1,75 @@
+1. https://code.sololearn.com/clxZ2aqdYOSp/#java
+
+    // usual case
+    public static double getAvg(int [] array) {
+        return Arrays.stream(array)
+            .average()
+            .orElse(0);
+    }
+
+
+    // one more operation - mapToDouble
+    // also good solution
+    public static double getAvg(int [] array) {
+         return Arrays.stream(array)
+                .mapToDouble(x -> x)
+                .average()
+                .orElse(0);
+    }
+
+
+    // Why throw?
+    public static double getAvg(int [] array) {
+        return Arrays.stream(list).average().orElseThrow();
+    }
+
+
+    // redundant if
+    // Why throw?
+    public static double getAvg(int [] array) {
+        //write your code here
+        if (array.length == 0) {
+            return 0.0;
+        }
+        return Arrays.stream(array).average().orElseThrow();
+    }
+
+    // redundant if
+    public static double getAvg(int [] array) {
+        if (array.length == 0) {
+            return 0.0;
+        }
+        return Arrays.stream(array).sum() / array.length;
+    }
+
+
+    // no space after if. Redundant if. In stream API we can handle it more gracefully
+    public static double getAvg(int [] array) {
+        if(array.length == 0) return 0;
+        return  Arrays.stream(array).average().getAsDouble();
+    }
+
+
+
+    // code formatting??
+    public static double getAvg(int [] array) {
+
+        if(array.length != 0){
+       int sum = Arrays.stream(array).sum();
+      return (double) sum / array.length;
+
+        } else return 0.0;
+    }
+
+
+
+    // why if else?
+    public static double getAvg(int [] array) {
+         if (array.length == 0){
+             return 0;
+         } else{
+             return Arrays.stream(array)
+                                    .average()
+                                    .getAsDouble();
+         }
+    }

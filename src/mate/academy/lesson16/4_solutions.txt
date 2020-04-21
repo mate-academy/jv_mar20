@@ -1,0 +1,60 @@
+4. https://code.sololearn.com/cftYkw00U1OG/#java
+
+
+    // also good solution
+    public static List<Character> getCharacterAtPosition(List<String> strings, int position) {
+        return strings.stream()
+                .map(Optional::ofNullable) // can be simplified
+                .map(str -> str.orElse(""))
+                .filter(str -> str.length() > position)
+                .map(str -> str.toLowerCase().charAt(position))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    // also good solution, but here we are not modifying the String comparing with previous solution
+    public static List<Character> getCharacterAtPosition(List<String> strings, int position) {
+        return strings.stream()
+        .filter(Objects::nonNull)
+        .filter(str -> str.length() > position)
+        .map(str -> Character.toLowerCase(str.charAt(position)))
+        .sorted()
+        .collect(Collectors.toList());
+    }
+
+    // also good solution
+    public static List<Character> getCharacterAtPosition(List<String> strings, int position) {
+        return strings.stream()
+                .filter(str -> str != null && position < str.length())
+                .map(str -> str.toLowerCase().charAt(position))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    //we can avoid if's
+    public static List<Character> getCharacterAtPosition(List<String> strings, int position) {
+        if (strings.stream().filter(Objects::nonNull).map(String::length).anyMatch(x -> x <= position)) {
+            return new ArrayList<>();
+        }
+        return strings.stream()
+            .filter(Objects::nonNull)
+            .map(string -> string.toLowerCase().charAt(position))
+            .sorted()
+            .collect(Collectors.toList());
+    }
+
+
+    // Даже так?) Старайтеся уникати try catch при роботі зі стрімами
+    // вони тоді стають негарними
+    public static List<Character> getCharacterAtPosition(List<String> strings, int position) {
+
+        try {
+            return strings.stream()
+                    .filter(string -> string != null)
+                    .map(string -> string.toLowerCase().charAt(position))
+                    .sorted()
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
